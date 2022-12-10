@@ -1,2 +1,2 @@
 # challenge-BP
-Repositorio de prueba Tècnica
+Repositorio de prueba Técnica
