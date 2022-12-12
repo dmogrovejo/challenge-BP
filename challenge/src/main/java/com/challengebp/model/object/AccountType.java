@@ -1,5 +1,8 @@
 package com.challengebp.model.object;
 
+/**
+ * @author David Mogrovejo
+ */
 public enum AccountType {
 
 	AHORROS(1), CORRIENTE(2);

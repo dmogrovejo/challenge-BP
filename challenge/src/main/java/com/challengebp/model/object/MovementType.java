@@ -1,5 +1,8 @@
 package com.challengebp.model.object;
 
+/**
+ * @author David Mogrovejo
+ */
 public enum MovementType {
 
 	CREDITO(1), DEBITO(2);

@@ -2,18 +2,17 @@ package com.challengebp.model;
 
 import com.challengebp.model.object.Gender;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
 /**
  * Master class for people management
  * @author David Mogrovejo
  */
 
 @MappedSuperclass
-public abstract class Person {
-	private Long id;
+public abstract class Person {	
 	private String name;
 	private Gender gender;
 	private Integer age;
@@ -21,13 +20,7 @@ public abstract class Person {
 	private String address;
 	private String phone;
 	
-	@Id
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Column(unique = true)
 	public String getName() {
 		return name;
 	}

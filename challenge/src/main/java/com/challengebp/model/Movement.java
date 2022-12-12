@@ -5,15 +5,18 @@ import java.util.Date;
 
 import com.challengebp.model.object.MovementType;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
 /**
  * 
  * Entity that maps the movements table, which is used to manage the movements of the accounts
@@ -21,27 +24,31 @@ import jakarta.persistence.TemporalType;
  */
 @Entity
 public class Movement {
-	private Long id;
-	private Date date;
+	private String id;
+	private Date dateMovement;
 	private MovementType movementType;
 	private BigDecimal value =  BigDecimal.ZERO;
 	private BigDecimal balance =  BigDecimal.ZERO;
+	private Account account;
+	private String description;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(name = "MOVEMENT_ID")
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getDate() {
-		return date;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DATE_MOVEMENT")
+	public Date getDateMovement() {
+		return dateMovement;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateMovement(Date date) {
+		this.dateMovement = date;
 	}
 	@Column(name = "MOVEMENT_TYPE")
 	@Enumerated(EnumType.STRING)
@@ -62,6 +69,23 @@ public class Movement {
 	}
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
-	}		
+	}
+	@ManyToOne
+	@JoinColumn(name = "ACCOUNT_ID")
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
+	
 	
 }

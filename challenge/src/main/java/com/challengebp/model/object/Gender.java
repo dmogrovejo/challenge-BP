@@ -1,5 +1,8 @@
 package com.challengebp.model.object;
 
+/**
+ * @author David Mogrovejo
+ */
 public enum Gender {
 	MASCULINO(1), FEMENINO(2), NO_DEFINIDO(3);
 	private Integer id;

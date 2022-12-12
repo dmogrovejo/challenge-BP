@@ -1,10 +1,11 @@
 package com.challengebp.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 
 /**
  * Entity that maps the Client table, which is used to manage clients
@@ -19,8 +20,11 @@ public class Client extends Person{
 	private boolean status =  true;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CLIENT_ID")
+    @Column(name = "CLIENT_ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "CLIENT_ID")
+    @TableGenerator(name = "CLIENT_ID", table = "ID_GEN",
+            pkColumnName = "NAME_PK", valueColumnName = "VALUE_PK",
+            pkColumnValue = "CLIENT_ID", allocationSize = 1, initialValue = 1)
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +43,7 @@ public class Client extends Person{
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
 	
 	
 }
